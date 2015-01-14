@@ -40,5 +40,3 @@ ADD ./001-docker.conf /etc/apache2/sites-enabled/
 RUN rm -rf /var/www/html/
 
 EXPOSE 80
-
-CMD ["/run.sh"]
