@@ -1,5 +1,5 @@
-FROM        debian
-MAINTAINER  Love Nyberg "love.nyberg@lovemusic.se"
+FROM        ubuntu:14.04
+MAINTAINER  Odewumi Babarinde Ayodeji "odewumibabarinde@abbaandking.com"
 
 # Update the package repository
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \ 
@@ -7,7 +7,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl locales
 
 # Configure timezone and locale
-RUN echo "Europe/Stockholm" > /etc/timezone && \
+RUN echo "Arica/Lagos" > /etc/timezone && \
 	dpkg-reconfigure -f noninteractive tzdata
 RUN export LANGUAGE=en_US.UTF-8 && \
 	export LANG=en_US.UTF-8 && \
@@ -21,11 +21,11 @@ RUN echo "deb http://packages.dotdeb.org wheezy-php55 all" >> /etc/apt/sources.l
 	wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
 # Install PHP 5.5
-RUN apt-get update; apt-get install -y php5-cli php5 php5-mcrypt php5-curl php5-pgsql php5-mysql
+RUN apt-get update; apt-get install -y php5-cli php5 php5-mcrypt php5-curl php5-pgsql php5-mysql php5-mongo php5-imagick php5-gd php5-intl
  
 # Let's set the default timezone in both cli and apache configs
-RUN sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Stockholm/g' /etc/php5/cli/php.ini
-RUN sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Stockholm/g' /etc/php5/apache2/php.ini
+RUN sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Africa\/Lagos/g' /etc/php5/cli/php.ini
+RUN sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Africa\/Lagos/g' /etc/php5/apache2/php.ini
 
 # Setup Composer
 RUN curl -sS https://getcomposer.org/installer | php && \
@@ -50,7 +50,7 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_SERVERADMIN admin@localhost
 ENV APACHE_SERVERNAME localhost
 ENV APACHE_SERVERALIAS docker.localhost
-ENV APACHE_DOCUMENTROOT /var/www
+ENV APACHE_DOCUMENTROOT /app/public
 
 EXPOSE 80
 ADD start.sh /start.sh
