@@ -20,10 +20,10 @@ RUN apt-get -y install git vim
 # Add shell scripts for starting apache2
 ADD apache2-start.sh /apache2-start.sh
 
+ADD run.sh /run.sh
+
 # Give the execution permissions
 RUN chmod 755 /*.sh
-
-ADD run.sh /run.sh
 
 # Add the Configurations files
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
