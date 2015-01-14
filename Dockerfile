@@ -36,7 +36,7 @@ RUN a2enmod rewrite
 #RUN sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Africa\/Lagos/g' /etc/php5/cli/php.ini
 #RUN sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Africa\/Lagos/g' /etc/php5/apache2/php.ini
 
-ADD ./001-docker.conf /etc/apache2/sites-enabled/
+ADD ./001-docker.conf /etc/apache2/sites-enabled/000-default.conf
 RUN rm -rf /var/www/html/
 
 EXPOSE 80
