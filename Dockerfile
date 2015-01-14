@@ -7,18 +7,18 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl locales
 
 # Configure timezone and locale
-RUN echo "Arica/Lagos" > /etc/timezone && \
-	dpkg-reconfigure -f noninteractive tzdata
-RUN export LANGUAGE=en_US.UTF-8 && \
-	export LANG=en_US.UTF-8 && \
-	export LC_ALL=en_US.UTF-8 && \
-	locale-gen en_US.UTF-8 && \
-	DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
+#RUN echo "Arica/Lagos" > /etc/timezone && \
+#	dpkg-reconfigure -f noninteractive tzdata
+#RUN export LANGUAGE=en_US.UTF-8 && \
+#	export LANG=en_US.UTF-8 && \
+#	export LC_ALL=en_US.UTF-8 && \
+#	locale-gen en_US.UTF-8 && \
+#	DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 
 # Added dotdeb to apt
-RUN echo "deb http://packages.dotdeb.org wheezy-php55 all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
-	echo "deb-src http://packages.dotdeb.org wheezy-php55 all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
-	wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add -
+#RUN echo "deb http://packages.dotdeb.org wheezy-php55 all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
+#	echo "deb-src http://packages.dotdeb.org wheezy-php55 all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
+	#wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
 # Install PHP 5.5
 RUN apt-get update; apt-get install -y php5-cli php5 php5-mcrypt php5-curl php5-pgsql php5-mysql php5-mongo php5-imagick php5-gd php5-intl
