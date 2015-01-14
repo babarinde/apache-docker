@@ -4,7 +4,7 @@ MAINTAINER  Odewumi Babarinde Ayodeji "odewumibabarinde@abbaandking.com"
 # Update the package repository
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \ 
 	DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
-	DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl locales
+	DEBIAN_FRONTEND=noninteractive apt-get install -y libicu-dev wget curl locales
 
 # Configure timezone and locale
 #RUN echo "Arica/Lagos" > /etc/timezone && \
