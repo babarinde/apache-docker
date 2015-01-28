@@ -14,8 +14,8 @@ RUN apt-get clean all
 RUN apt-get update 
 RUN apt-get -y install supervisor 
 RUN apt-get -y install apache2 
-RUN apt-get -y install php5-cli php5 libapache2-mod-php5 php5-mysql php5-gd php-pear php-apc php5-curl curl lynx-cur php5-mongo php5-imagick php5-intl  
-RUN apt-get -y install git vim
+RUN apt-get -y install php5-cli php5 libapache2-mod-php5 php5-mysql php5-gd php-pear php-apc php5-curl curl lynx-cur php5-mongo php5-imagick php5-intl php5-bcmath php5-mbstring  
+RUN apt-get -y install git vim wget
 
 # Add shell scripts for starting apache2
 ADD apache2-start.sh /apache2-start.sh
@@ -38,6 +38,18 @@ RUN a2enmod rewrite
 
 ADD ./001-docker.conf /etc/apache2/sites-enabled/000-default.conf
 RUN rm -rf /var/www/html/
+
+#loging to papertrail
+RUN echo "*.*          @logs2.papertrailapp.com:52180" >> /etc/rsyslog.conf 
+RUN sudo service rsyslog restart
+RUN wget https://github.com/papertrail/remote_syslog2/releases/download/v0.13/remote_syslog_linux_amd64.tar.gz
+RUN tar xzf ./remote_syslog*.tar.gz
+RUN sudo cp ./remote_syslog/* /usr/local/bin
+RUN sudo remote_syslog \
+  -p 52180 \
+  -d logs2.papertrailapp.com \
+  --pid-file=/var/run/remote_syslog.pid \
+  /var/log/apache2/*.log
 
 EXPOSE 80
 
