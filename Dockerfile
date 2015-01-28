@@ -14,7 +14,7 @@ RUN apt-get clean all
 RUN apt-get update 
 RUN apt-get -y install supervisor 
 RUN apt-get -y install apache2 
-RUN apt-get -y install php5-cli php5 libapache2-mod-php5 php5-mysql php5-gd php-pear php-apc php5-curl curl lynx-cur php5-mongo php5-imagick php5-intl php5-bcmath php5-mbstring  
+RUN apt-get -y install php5-cli php5 libapache2-mod-php5 php5-mysql php5-gd php-pear php-apc php5-curl curl lynx-cur php5-mongo php5-imagick php5-intl  
 RUN apt-get -y install git vim wget
 
 # Add shell scripts for starting apache2
