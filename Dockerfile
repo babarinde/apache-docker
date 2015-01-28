@@ -40,14 +40,14 @@ ADD ./001-docker.conf /etc/apache2/sites-enabled/000-default.conf
 RUN rm -rf /var/www/html/
 
 #loging to papertrail
-RUN echo "*.*          @logs2.papertrailapp.com:52180" >> /etc/rsyslog.conf 
+RUN echo "*.*          @$PAPERTRAIL_HOST:$PAPERTRAIL_PORT" >> /etc/rsyslog.conf 
 RUN sudo service rsyslog restart
 RUN wget https://github.com/papertrail/remote_syslog2/releases/download/v0.13/remote_syslog_linux_amd64.tar.gz
 RUN tar xzf ./remote_syslog*.tar.gz
 RUN sudo cp ./remote_syslog/* /usr/local/bin
 RUN sudo remote_syslog \
-  -p 52180 \
-  -d logs2.papertrailapp.com \
+  -p $PAPERTRAIL_PORT \
+  -d $PAPERTRAIL_HOST \
   --pid-file=/var/run/remote_syslog.pid \
   /var/log/apache2/*.log
 
