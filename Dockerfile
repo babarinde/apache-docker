@@ -45,5 +45,3 @@ RUN tar xzf ./remote_syslog*.tar.gz
 RUN sudo cp ./remote_syslog/* /usr/local/bin
 
 EXPOSE 80
-
-CMD ["/run.sh"]
