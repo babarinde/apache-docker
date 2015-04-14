@@ -20,7 +20,7 @@ RUN apt-get -y install git vim wget build-essential
 #Install php-mongo extension 1.3.2
 RUN wget https://github.com/mongodb/mongo-php-driver/archive/1.3.2.tar.gz
 RUN tar zvxf 1.3.2.tar.gz
-RUN cd mongo-php-driver-1.3.2
+WORKDIR /mongo-php-driver-1.3.2
 RUN phpize
 RUN ./configure
 RUN make all
