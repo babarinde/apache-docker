@@ -14,8 +14,9 @@ RUN apt-get clean all
 RUN apt-get update  
 RUN apt-get -y install supervisor 
 RUN apt-get -y install apache2 
-RUN apt-get -y install php5-cli php5 libapache2-mod-php5 php5-mysql php5-gd php-pear php5-mongo php-apc php5-curl curl lynx-cur php5-dev php5-imagick php5-intl  
+RUN apt-get -y install php5-cli php5 libapache2-mod-php5 php5-mysql php5-gd php5-mcrypt php-pear php5-mongo php-apc php5-curl curl lynx-cur php5-dev php5-imagick php5-intl  
 RUN apt-get -y install git vim wget build-essential
+RUN sudo php5enmod mcrypt
 
 #Install php-mongo extension 1.3.2
 RUN wget https://github.com/mongodb/mongo-php-driver/archive/1.3.2.tar.gz
