@@ -26,7 +26,7 @@ RUN phpize
 RUN ./configure
 RUN make all
 RUN sudo make install
-
+WORKDIR /
 
 # Add shell scripts for starting apache2
 ADD apache2-start.sh /apache2-start.sh
@@ -50,10 +50,6 @@ RUN a2enmod rewrite
 ADD ./001-docker.conf /etc/apache2/sites-enabled/000-default.conf
 RUN rm -rf /var/www/html/
 
-#logging via remote_syslog
-RUN wget https://github.com/papertrail/remote_syslog2/releases/download/v0.13/remote_syslog_linux_amd64.tar.gz
-RUN tar xzf ./remote_syslog*.tar.gz
-RUN sudo cp ./remote_syslog/* /usr/local/bin
 
 EXPOSE 80
 
