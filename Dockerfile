@@ -45,7 +45,7 @@ WORKDIR /
 RUN git clone https://github.com/StephenHynes7/le_rsyslog.git
 ADD log.json le_rsyslog/
 WORKDIR /le_rsyslog
-ENV MY_ACCOUNT_KEY 4dc53dcd-7572-490d-a9fa-34f4875fad02
+ENV MY_ACCOUNT_KEY=4dc53dcd-7572-490d-a9fa-34f4875fad02
 RUN sudo python lersyslog register --account-key=MY_ACCOUNT_KEY
 RUN sudo python lersyslog follow log.json
 
