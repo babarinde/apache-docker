@@ -22,7 +22,7 @@ RUN phpize
 RUN ./configure
 RUN make all
 RUN sudo make install
-WORKDIR /
+
 
 # Add shell scripts for starting apache2
 ADD apache2-start.sh /apache2-start.sh
@@ -32,6 +32,7 @@ ADD run.sh /run.sh
 # Give the execution permissions
 RUN chmod 755 /*.sh
 
+
 # Add the Configurations files
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
@@ -39,14 +40,23 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN a2enmod php5
 RUN a2enmod rewrite
 
+# Log configuration
+WORKDIR /
+RUN git clone https://github.com/StephenHynes7/le_rsyslog.git
+ADD log.json /le_rsyslog
+WORKDIR /le_rsyslog
+ENV MY_ACCOUNT_KEY 4dc53dcd-7572-490d-a9fa-34f4875fad02
+RUN sudo python lersyslog register --account-key=MY_ACCOUNT_KEY
+RUN sudo python lersyslog follow log.json
+
+
 # Let's set the default timezone in both cli and apache configs
 #RUN sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Africa\/Lagos/g' /etc/php5/cli/php.ini
 #RUN sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Africa\/Lagos/g' /etc/php5/apache2/php.ini
 
 ADD ./001-docker.conf /etc/apache2/sites-enabled/000-default.conf
 RUN rm -rf /var/www/html/
-
-
+WORKDIR /
 EXPOSE 80
 
 CMD ["/run.sh"]
