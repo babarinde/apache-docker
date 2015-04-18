@@ -4,10 +4,6 @@ MAINTAINER  Odewumi Babarinde Ayodeji "odewumibabarinde@abbaandking.com"
 # Set the enviroment variable
 ENV DEBIAN_FRONTEND noninteractive
 
-# Added dotdeb to apt
-#RUN echo "deb http://packages.dotdeb.org wheezy-php55 all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
-#	echo "deb-src http://packages.dotdeb.org wheezy-php55 all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
-	#wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
 # Install required packages
 RUN apt-get clean all
