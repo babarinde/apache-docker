@@ -1,0 +1,14 @@
+{
+    "logs": [
+        {
+            "path": "/var/log/apache2/access.log",
+            "name": "acces.log",
+            "token": "6350f902-d25e-40e9-ae10-ae879d2b4732"
+        },
+        {
+            "path": "/var/log/apache2/error.log",
+            "name": "error.log",
+            "token": "6350f902-d25e-40e9-ae10-ae879d2b4732"
+        }
+    ]
+}
